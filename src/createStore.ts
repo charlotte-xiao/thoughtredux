@@ -1,4 +1,6 @@
 import ActionTypes from "./utils/actionTypes";
+import isPlainObject from "./utils/isPlainObject";
+import kindOf from "./utils/kindOf";
 
 function createStore(reducer, preloadState, enhancer) {
 
@@ -14,6 +16,11 @@ function createStore(reducer, preloadState, enhancer) {
   }
 
   function dispatch(action) {
+
+    if (!isPlainObject(action)) {
+      throw new Error(`Action isn't plain object, it was ${kindOf(action)}`)
+    }
+
     if (isDispatching) {
       throw new Error("in dispatching, can't dispatch");
     }
