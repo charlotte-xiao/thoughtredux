@@ -21,3 +21,7 @@ const reducer = (state = {}, action) => {
 }
 ```
 
+## E-2_initState
+
+- 执行初始化`dispatch({type: actionTypes.INIT})`
+- 自定义Reducer需要默认返回值

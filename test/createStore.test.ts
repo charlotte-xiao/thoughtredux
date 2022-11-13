@@ -6,6 +6,7 @@ const mockReducer = (state, action) => {
       return state + action.payload
     case 'decrement':
       return state - action.payload
+    // 重点：需要默认返回
     default:
       return state;
   }
