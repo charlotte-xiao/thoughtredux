@@ -25,3 +25,10 @@ const reducer = (state = {}, action) => {
 
 - 执行初始化`dispatch({type: actionTypes.INIT})`
 - 自定义Reducer需要默认返回值
+
+## E-3_checkObject
+
+- 判断是否是普通对象 `isPlainObject`
+- 获取对象类型 `kindOf`
+
+PS: npm大法好 见轮子 [is-plain-object](https://www.npmjs.com/package/is-plain-object) 和 [kind-of](https://www.npmjs.com/package/kind-of)
