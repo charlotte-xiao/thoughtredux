@@ -1,4 +1,4 @@
-import ActionTypes from "./utils/ActionTypes";
+import ActionTypes from "./utils/actionTypes";
 
 function createStore(reducer, preloadState, enhancer) {
 
