@@ -2,11 +2,9 @@ module.exports = {
   coveragePathIgnorePatterns: [
     "/node_modules/"
   ],
-  coverageReporters: [
-    "json",
-    "text",
-    "lcov",
-    "clover"
+  coverageReporters: ["lcov",],
+  testMatch: [
+    '<rootDir>/test/**/*.test.ts',
   ],
   testEnvironment: "node",
   testPathIgnorePatterns: [
@@ -14,12 +12,8 @@ module.exports = {
   ],
   transform: {
     '^.+\\.ts$': 'babel-jest',
-    "^.+\\.tsx$": "babel-jest",
-    '^.+\\.js$': 'babel-jest',
-    "^.+\\.jsx$": "babel-jest"
   },
   transformIgnorePatterns: [
     "/node_modules/",
-    "\\.pnp\\.[^\\/]+$"
   ],
 };

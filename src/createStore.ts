@@ -1,3 +1,5 @@
+import ActionTypes from "./utils/ActionTypes";
+
 function createStore(reducer, preloadState, enhancer) {
 
   let currentReducer = reducer;
@@ -25,9 +27,13 @@ function createStore(reducer, preloadState, enhancer) {
     return action;
   }
 
+  dispatch({type: ActionTypes.INIT})
+
   return {
     dispatch,
     getState,
   }
 
 }
+
+export default createStore;
