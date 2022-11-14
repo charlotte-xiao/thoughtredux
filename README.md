@@ -51,3 +51,9 @@ function loopSubscribe () {
 loopSubscribe();
 store.dispatch();
 ```
+# E-6_observable
+
+- 通过传入一个函数next获取state
+- 本质也是使用subscribe
+- [redux-observable](https://redux-observable.js.org/)
+
