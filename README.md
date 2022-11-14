@@ -37,3 +37,17 @@ PS: npm大法好 见轮子 [is-plain-object](https://www.npmjs.com/package/is-pl
 
 - 替换当前reducer进行state计算 `replaceReducer`
 - 适用与动态加载reducer等情况（感觉用的机会不多）
+
+# E-5_subscribe
+
+- 发布订阅模式
+- 双队列 currentListeners 和 nextListeners 解决递归调用问题
+- ensureCanMutateNextListeners 队列浅拷贝
+
+```javascript
+function loopSubscribe () {
+  store.subscribe(loopSubscribe);
+}
+loopSubscribe();
+store.dispatch();
+```
