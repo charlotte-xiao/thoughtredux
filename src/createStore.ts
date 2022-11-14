@@ -6,6 +6,8 @@ function createStore(reducer, preloadState, enhancer) {
 
   let currentReducer = reducer;
   let currentState = preloadState;
+  let currentListeners = [];
+  let nextListeners = currentListeners;
   let isDispatching = false;
 
   function getState() {
@@ -13,6 +15,43 @@ function createStore(reducer, preloadState, enhancer) {
       throw new Error("in dispatching, can't get state");
     }
     return currentState;
+  }
+
+  function ensureCanMutateNextListeners() {
+    if (nextListeners === currentListeners) {
+      nextListeners = currentListeners.slice();
+    }
+  }
+
+  function subscribe(listener) {
+    if (typeof listener !== 'function') {
+      throw new Error(`listener isn't a function. This is: '${kindOf(listener)}`);
+    }
+
+    if (isDispatching) {
+      throw new Error("in dispatching, can't subscribe");
+    }
+    let isSubscribed = true;
+
+    ensureCanMutateNextListeners();
+    nextListeners.push(listener);
+
+    return function unsubscribe() {
+      if (!isSubscribed) {
+        return;
+      }
+
+      if (isDispatching) {
+        throw new Error("in dispatching, can't unsubscribe");
+      }
+
+      isSubscribed = false;
+
+      ensureCanMutateNextListeners();
+      const index = nextListeners.indexOf(listener);
+      nextListeners.splice(index, 1);
+      currentListeners = null;
+    }
   }
 
   function dispatch(action) {
@@ -31,6 +70,10 @@ function createStore(reducer, preloadState, enhancer) {
     } finally {
       isDispatching = false;
     }
+
+    const listeners = (currentListeners = nextListeners);
+    listeners.forEach(listener => listener());
+
     return action;
   }
 
@@ -50,7 +93,8 @@ function createStore(reducer, preloadState, enhancer) {
   return {
     dispatch,
     getState,
-    replaceReducer
+    replaceReducer,
+    subscribe
   }
 
 }
