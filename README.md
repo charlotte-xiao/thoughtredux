@@ -33,12 +33,12 @@ const reducer = (state = {}, action) => {
 
 PS: npm大法好 见轮子 [is-plain-object](https://www.npmjs.com/package/is-plain-object) 和 [kind-of](https://www.npmjs.com/package/kind-of)
 
-# E-4_replaceReducer
+## E-4_replaceReducer
 
 - 替换当前reducer进行state计算 `replaceReducer`
 - 适用与动态加载reducer等情况（感觉用的机会不多）
 
-# E-5_subscribe
+## E-5_subscribe
 
 - 发布订阅模式
 - 双队列 currentListeners 和 nextListeners 解决递归调用问题
@@ -51,7 +51,7 @@ function loopSubscribe () {
 loopSubscribe();
 store.dispatch();
 ```
-# E-6_observable
+## E-6_observable
 
 - 通过传入一个函数next获取state
 - 本质也是使用subscribe
