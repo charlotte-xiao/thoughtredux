@@ -39,7 +39,7 @@ describe('test createStore', () => {
     expect(store.getState()).toEqual(-1);
   })
 
-  it('测试 replaceReducer', () => {
+  it('test replaceReducer', () => {
     // @ts-ignore
     const store = createStore(mockReducer, 1);
 
@@ -53,7 +53,7 @@ describe('test createStore', () => {
     expect(store.getState()).toEqual('the new state');
     expect(newReducer).toBeCalledTimes(2);
   })
-  it('测试 subscribe', () => {
+  it('test subscribe', () => {
     // @ts-ignore
     const store = createStore(mockReducer, 1);
 
@@ -64,7 +64,7 @@ describe('test createStore', () => {
     expect(store.getState()).toEqual(3);
     expect(listener).toBeCalledTimes(1);
   })
-  it('测试 unsubscribe', () => {
+  it('test unsubscribe', () => {
     // @ts-ignore
     const store = createStore(mockReducer, 1);
 
@@ -76,5 +76,22 @@ describe('test createStore', () => {
     store.dispatch({type: 'increment', payload: 2});
     expect(store.getState()).toEqual(3);
     expect(listener).toBeCalledTimes(0);
+  })
+  it('test observable', () => {
+
+    // @ts-ignore
+    const store = createStore(mockReducer, 1);
+    let stateResult;
+    const next = jest.fn((state) => stateResult = state)
+
+    const observable = store.observable();
+    observable.subscribe({next});
+    expect(next).toBeCalledWith(1);
+
+    store.dispatch({type: 'increment', payload: 2});
+
+    expect(next).toBeCalledWith(3);
+    expect(stateResult).toEqual(3);
+    expect(next).toBeCalledTimes(2);
   })
 })

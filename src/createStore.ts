@@ -88,13 +88,32 @@ function createStore(reducer, preloadState, enhancer) {
     dispatch({type: ActionTypes.REPLACE})
   }
 
+  function observable() {
+    const outerSubscribe = subscribe;
+
+    return {
+      subscribe(observer) {
+        function observeState() {
+          if (observer.next) {
+            observer.next(getState());
+          }
+        }
+
+        observeState();
+        const unsubscribe = outerSubscribe(observeState);
+        return {unsubscribe}
+      }
+    }
+  }
+
   dispatch({type: ActionTypes.INIT})
 
   return {
     dispatch,
     getState,
     replaceReducer,
-    subscribe
+    subscribe,
+    observable
   }
 
 }
