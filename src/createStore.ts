@@ -34,11 +34,23 @@ function createStore(reducer, preloadState, enhancer) {
     return action;
   }
 
+  function replaceReducer(nextReducer) {
+
+    if (typeof nextReducer !== 'function') {
+      throw new Error(`nextReducer isn't a function. This is: '${kindOf(nextReducer)}`)
+    }
+
+    currentReducer = nextReducer;
+
+    dispatch({type: ActionTypes.REPLACE})
+  }
+
   dispatch({type: ActionTypes.INIT})
 
   return {
     dispatch,
     getState,
+    replaceReducer
   }
 
 }

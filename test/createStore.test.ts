@@ -38,4 +38,19 @@ describe('test createStore', () => {
     store.dispatch({type: 'decrement', payload: 4})
     expect(store.getState()).toEqual(-1)
   })
+
+  it('测试 replaceReducer', () => {
+    // @ts-ignore
+    const store = createStore(mockReducer, 1)
+
+    const newReducer = jest.fn((state, action) => {
+      return 'the new state'
+    })
+
+    store.replaceReducer(newReducer)
+
+    store.dispatch({type: 'increment', payload: 2})
+    expect(store.getState()).toEqual('the new state')
+    expect(newReducer).toBeCalledTimes(2) // REPLACE + increment
+  })
 })

@@ -4,6 +4,7 @@ const randomString = () =>
 
 const ActionTypes = {
   INIT: `@@redux/INIT${randomString()}`,
+  REPLACE: `@@redux/REPLACE${randomString()}`,
 }
 
 export default ActionTypes;
