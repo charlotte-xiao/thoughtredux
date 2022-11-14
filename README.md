@@ -32,3 +32,8 @@ const reducer = (state = {}, action) => {
 - 获取对象类型 `kindOf`
 
 PS: npm大法好 见轮子 [is-plain-object](https://www.npmjs.com/package/is-plain-object) 和 [kind-of](https://www.npmjs.com/package/kind-of)
+
+# E-4_replaceReducer
+
+- 替换当前reducer进行state计算 `replaceReducer`
+- 适用与动态加载reducer等情况（感觉用的机会不多）
