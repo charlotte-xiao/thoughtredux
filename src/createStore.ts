@@ -4,6 +4,10 @@ import kindOf from "./utils/kindOf";
 
 function createStore(reducer, preloadState, enhancer) {
 
+  if (enhancer){
+    return enhancer(createStore)(reducer, preloadState);
+  }
+
   let currentReducer = reducer;
   let currentState = preloadState;
   let currentListeners = [];
