@@ -27,10 +27,10 @@ describe('test applyMiddlewares', () => {
 
     const store = createStore(reducer, 1, applyMiddlewares(mockFn1, mockFn2))
 
-    store.dispatch({type: 'increment', payload: 2})
+    store.dispatch({type: 'increment', payload: 2});
 
-    expect(store.getState()).toEqual(3)
-    expect(mockFn1).toBeCalledTimes(1)
-    expect(mockFn2).toBeCalledTimes(1)
+    expect(store.getState()).toEqual(3);
+    expect(mockFn1).toBeCalledTimes(1);
+    expect(mockFn2).toBeCalledTimes(1);
   })
 })
