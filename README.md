@@ -57,3 +57,8 @@ store.dispatch();
 - 本质也是使用subscribe
 - [redux-observable](https://redux-observable.js.org/)
 
+## E-7_applyMiddlewares
+
+- 作用：增强 createStore的功能
+- 函数柯里化（Currying）：指将一个函数从可调用的 f(a, b, c) 转换为可调用的 f(a)(b)(c)
+- `compose`方法:使用 reduce 函数来将数组里每个函数进行头接尾尾接头
