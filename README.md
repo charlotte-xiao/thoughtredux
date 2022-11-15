@@ -62,3 +62,22 @@ store.dispatch();
 - 作用：增强 createStore的功能
 - 函数柯里化（Currying）：指将一个函数从可调用的 f(a, b, c) 转换为可调用的 f(a)(b)(c)
 - `compose`方法:使用 reduce 函数来将数组里每个函数进行头接尾尾接头
+
+## 其他
+
+- `combineReducers`:主要作用是将多个 reducer 组件成一个新 reducer，执行 dispatch 后，所有 map 里的 reducer 都会被执行
+当你用到了多个子状态 Slice 时会用到。
+- `combineActionCreators`:
+将多个 actionCreators 都执行一遍，并返回 () => dispatch(actionCreator()) 这样的函数
+
+## 总结
+
+总结一下,我们都干了什么：
+
+Redux实现一个事件总线 + 数据（状态）中心
+- getState
+- dispatch(action) 
+- subscribe(listener)
+- replaceReducer
+- observable
+- enhancer => applyMiddlewares
