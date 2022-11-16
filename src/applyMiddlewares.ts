@@ -1,11 +1,12 @@
-import compose from './compose'
-
 function applyMiddlewares(...middlewares) {
   return (createStore) => (reducer, preloadState) => {
     const store = createStore(reducer, preloadState)
 
-    let dispatch = compose(...middlewares)(store.dispatch)
-    return {...store, dispatch};
+    middlewares = middlewares.reverse();
+    middlewares.forEach(middlewares => {
+      store.dispatch = middlewares(store.dispatch);
+    })
+    return store;
   }
 }
 
